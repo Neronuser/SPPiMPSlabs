@@ -2,19 +2,24 @@ package lab1.creational;
 
 public class Demo {
     public static void main(String[] args) {
-        AbstractFactory armyFactory = FactoryProducer.getFactory("ARMY");
-        AbstractFactory unitTypeFactory = FactoryProducer.getFactory("UNITTYPE");
+        RomanianArmyFactory romaniansFactory = new RomanianArmyFactory();
+        ChineseArmyFactory chineseFactory = new ChineseArmyFactory();
+        Army romanians = new Army();
+        Army chinese = new Army();
+        romanians.aviationTeams.add(romaniansFactory.createAviation());
+        romanians.aviationTeams.add(romaniansFactory.createAviation());
+        chinese.aviationTeams.add(chineseFactory.createAviation());
 
-        Army chinese = armyFactory.getArmy("CHINESE");
-        Army romanian = armyFactory.getArmy("ROMANIAN");
-        chinese.attack();
-        romanian.attack();
+        romanians.tankTeams.add(romaniansFactory.createTanks());
+        chinese.tankTeams.add(chineseFactory.createTanks());
+        chinese.tankTeams.add(chineseFactory.createTanks());
 
-        UnitType aviation = unitTypeFactory.getUnitType("AVIATION");
-        UnitType tanks = unitTypeFactory.getUnitType("TANKFORCES");
-        UnitType submarines = unitTypeFactory.getUnitType("SUBMARINEFORCES");
-        aviation.advance();
-        tanks.advance();
-        submarines.advance();
+        romanians.submarineTeams.add(romaniansFactory.createSubmarines());
+        chinese.submarineTeams.add(chineseFactory.createSubmarines());
+
+        System.out.println("Romanians: ");
+        romanians.getInfo();
+        System.out.println("Chinese: ");
+        chinese.getInfo();
     }
 }
